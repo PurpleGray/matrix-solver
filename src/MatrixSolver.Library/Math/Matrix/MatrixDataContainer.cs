@@ -2,7 +2,7 @@ using System;
 
 namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 {
-    public abstract class MatrixDataContainer<T> where T : struct, IEquatable<T>
+    public abstract class MatrixDataContainer<T> where T : struct, IEquatable<T>, IFormattable
     {
         public readonly int RowCount;
 
