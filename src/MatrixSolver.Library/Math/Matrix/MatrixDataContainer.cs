@@ -27,6 +27,20 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
         public abstract T GetAt(int row, int column);
         
         public abstract T SetAt(int row, int column, T value);
+        
+        public T this[int row, int column]
+        {
+            get
+            {
+                // TODO: Validate ranges
+                return GetAt(row, column);
+            }
+
+            set
+            {
+                SetAt(row, column, value);
+            }
+        }
 
         public virtual void Clear()
         {

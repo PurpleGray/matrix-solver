@@ -2,8 +2,8 @@ using System;
 
 namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 {
-    public abstract class Matrix<T> : IFormattable, IEquatable<Matrix<T>>
-                                    where T : struct, IEquatable<T>, IFormattable
+    public abstract partial class Matrix<T> : IFormattable, IEquatable<Matrix<T>>
+                                    where T : struct, IEquatable<T>, IFormattable, ICloneable
     {
         protected Matrix(MatrixDataContainer<T> storage)
         {
@@ -17,6 +17,12 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
         public int ColumnCount { get; private set; }
         
         public int RowCount { get; private set; }
+        
+        public T this[int row, int column]
+        {
+            get { return Storage[row, column]; }
+            set { Storage[row, column] = value; }
+        }
         
         public T GetAt(int row, int column)
         {
@@ -38,25 +44,13 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
             return Storage.ToArray();
         }
 
-        public Matrix<T> Append(Matrix<T> rightMatrix)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract Matrix<T> Add(Matrix<T> rightMatrix);
 
-        public Matrix<T> Subtract(Matrix<T> other)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract Matrix<T> Subtract(Matrix<T> other);
 
-        public Matrix<T> Multiply(Matrix<T> other)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract Matrix<T> Multiply(Matrix<T> other);
 
-        public Matrix<T> Transpose()
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract Matrix<T> Transpose();
         
         public string ToString(string format, IFormatProvider formatProvider)
         {
