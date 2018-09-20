@@ -54,12 +54,12 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
         
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(); // TODO
         }
 
         public bool Equals(Matrix<T> other)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(); // TODO
         }
     }
 }
