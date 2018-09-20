@@ -28,7 +28,7 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
         
         public abstract T GetAt(int row, int column);
         
-        public abstract T SetAt(int row, int column, T value);
+        public abstract void SetAt(int row, int column, T value);
         
         public T this[int row, int column]
         {
@@ -58,10 +58,18 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 
         public virtual T[,] ToArray()
         {
-            throw new NotImplementedException();
+            var retArr = new T[RowCount, ColumnCount];
+            for (int i = 0; i < RowCount; i++)
+            {
+                for (int j = 0; j < ColumnCount; j++)
+                {
+                    retArr[i, j] = GetAt(i, j);
+                }
+            }
+            return retArr;
         }
         
-        private void ValidateRange(int row, int column)
+        protected void ValidateRange(int row, int column)
         {
             if (row < 0 || row >= RowCount)
             {
