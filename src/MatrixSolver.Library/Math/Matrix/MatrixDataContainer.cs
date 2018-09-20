@@ -32,12 +32,13 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
         {
             get
             {
-                // TODO: Validate ranges
+                ValidateRange(row, column);
                 return GetAt(row, column);
             }
 
             set
             {
+                ValidateRange(row, column);
                 SetAt(row, column, value);
             }
         }
@@ -50,6 +51,19 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
         public virtual T[,] ToArray()
         {
             throw new NotImplementedException();
+        }
+        
+        private void ValidateRange(int row, int column)
+        {
+            if (row < 0 || row >= RowCount)
+            {
+                throw new ArgumentOutOfRangeException("row");
+            }
+
+            if (column < 0 || column >= ColumnCount)
+            {
+                throw new ArgumentOutOfRangeException("column");
+            }
         }
     }
 }
