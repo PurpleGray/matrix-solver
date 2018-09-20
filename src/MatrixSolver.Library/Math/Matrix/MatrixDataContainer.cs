@@ -8,6 +8,8 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 
         public readonly int ColumnCount;
 
+        public abstract T Zero { get; }
+
         protected MatrixDataContainer(int rowCount, int columnCount)
         {
             if (rowCount <= 0)
@@ -45,7 +47,13 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 
         public virtual void Clear()
         {
-            throw new NotImplementedException();
+            for (var i = 0; i < RowCount; i++)
+            {
+                for (var j = 0; j < ColumnCount; j++)
+                {
+                    SetAt(i, j, Zero);
+                }
+            }
         }
 
         public virtual T[,] ToArray()
