@@ -15,7 +15,13 @@ namespace MatrixSolver.Library.IO
 
         protected override void CreateOnDisk()
         {
-            File.Create(FSPath);
+            var file = File.Create(FSPath);
+            file.Close();
+        }
+
+        public void WriteToFile(string content)
+        {
+            File.WriteAllText(FSPath, content);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace MatrixSolver.Library.IO
         public abstract bool IsExists();
 
         protected abstract void CreateOnDisk();
-
+        
         protected PathBase(string path)
         {
             FSPath = path;
