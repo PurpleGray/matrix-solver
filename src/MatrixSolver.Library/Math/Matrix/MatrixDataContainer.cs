@@ -4,11 +4,11 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 {
     public abstract class MatrixDataContainer<T> where T : struct, IEquatable<T>, IFormattable
     {
+        protected static readonly T Zero = BuilderInstance<T>.Matrix.Zero;
+        
         public readonly int RowCount;
 
         public readonly int ColumnCount;
-
-        public abstract T Zero { get; }
 
         protected MatrixDataContainer(int rowCount, int columnCount)
         {

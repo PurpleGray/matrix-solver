@@ -18,8 +18,6 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer
             Data = data;
         }
 
-        public override int Zero { get; } = 0;
-
         public override int GetAt(int row, int column)
         {
             ValidateRange(row, column);
