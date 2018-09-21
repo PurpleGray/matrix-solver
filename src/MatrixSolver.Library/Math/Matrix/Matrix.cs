@@ -73,7 +73,18 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 
         public bool Equals(Matrix<T> other)
         {
-            throw new NotImplementedException(); // TODO
+            return other != null && Storage.Equals(other.Storage);
+        }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as Matrix<T>;
+            return other != null && Storage.Equals(other.Storage);
+        }
+
+        public override int GetHashCode()
+        {
+            return Storage.GetHashCode();
         }
     }
 }

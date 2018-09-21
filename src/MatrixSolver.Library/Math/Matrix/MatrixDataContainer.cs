@@ -2,7 +2,8 @@ using System;
 
 namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 {
-    public abstract class MatrixDataContainer<T> where T : struct, IEquatable<T>, IFormattable
+    public abstract class MatrixDataContainer<T> : IEquatable<MatrixDataContainer<T>>
+        where T : struct, IEquatable<T>, IFormattable
     {
         protected static readonly T Zero = BuilderInstance<T>.Matrix.Zero;
         
@@ -124,6 +125,60 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
                     target.SetAt(j, i, GetAt(i, j));
                 }
             }
+        }
+
+        public bool Equals(MatrixDataContainer<T> other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+            if (ColumnCount != other.ColumnCount || RowCount != other.RowCount)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            // Perform element wise comparison.
+            for (int i = 0; i < RowCount; i++)
+            {
+                for (int j = 0; j < ColumnCount; j++)
+                {
+                    var item = GetAt(i, j);
+                    var otherItem = other.GetAt(i, j);
+                    if (!item.Equals(otherItem))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        public sealed override bool Equals(object obj)
+        {
+            return Equals(obj as MatrixDataContainer<T>);
+        }
+
+        public override int GetHashCode()
+        {
+            var hashNum = System.Math.Min(RowCount*ColumnCount, 25);
+            int hash = 17;
+            unchecked
+            {
+                for (var i = 0; i < hashNum; i++)
+                {
+                    int col;
+                    int row = System.Math.DivRem(i, ColumnCount, out col);
+                    hash = hash*31 + GetAt(row, col).GetHashCode();
+                }
+            }
+            return hash;
         }
     }
 }
