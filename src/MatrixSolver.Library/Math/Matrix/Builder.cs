@@ -16,7 +16,7 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 
         public abstract Matrix<T> SameAs(Matrix<T> matrix);
 
-        public abstract Matrix<T> Random(int rowCount, int columnCount, int minVal, int maxVal);
+        public abstract Matrix<T> Random(int rowCount, int columnCount, T minVal, T maxVal);
     }
 
     internal static class BuilderInstance<T> where T : struct, IEquatable<T>, IFormattable
