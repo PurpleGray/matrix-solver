@@ -13,7 +13,27 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer
 
         public override Matrix<int> FromFormattedString(string rawString)
         {
-            throw new NotImplementedException();
+            // Delimit string by rows
+            var strRows = rawString.Split(new[] {'\r', '\n'});
+            // Get matrix sizes
+            var rowCount = strRows.Length;
+            var colCount = strRows[0].Trim().Split(new char[] {' ', '\t'}, StringSplitOptions.RemoveEmptyEntries).Length;
+
+            var matrixContainer = MatrixDataContainer.OfSize(rowCount, colCount);
+            
+            // Fill the matrix storage
+            for (var i = 0; i < strRows.Length; i++)
+            {
+                var columnValues =
+                    strRows[i].Trim().Split(new char[] {' ', '\t'}, StringSplitOptions.RemoveEmptyEntries);
+
+                for (var j = 0; j < columnValues.Length; j++)
+                {
+                    matrixContainer.SetAt(i, j, int.Parse(columnValues[j]));
+                }
+            }
+            
+            return new Matrix(matrixContainer);
         }
 
         public override Matrix<int> FromDimensions(int rowCount, int columnCount)
