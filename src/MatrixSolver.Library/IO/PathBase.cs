@@ -21,7 +21,7 @@ namespace MatrixSolver.Library.IO
 
         public abstract bool IsExists();
 
-        protected abstract bool CreateOnDisk();
+        protected abstract void CreateOnDisk();
 
         protected PathBase(string path)
         {

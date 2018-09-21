@@ -14,26 +14,24 @@ namespace MatrixSolver.Library.IO
         /// </summary>
         public string DirectoryName => System.IO.Path.GetDirectoryName(FSPath);
         
-        protected override bool CreateOnDisk()
+        protected override void CreateOnDisk()
         {
-            if (!IsExists())
-            {
-                Directory.CreateDirectory(FSPath);
-                return true;
-            }
-
-            return false;
+            Directory.CreateDirectory(FSPath);
         }
         
         public override bool IsExists()
         {
             return Directory.Exists(FSPath);
         }
-
-        public static PathBase Create(string path)
+        
+        public static PathBase OpenOrCreate(string path)
         {
             var dir = new DirectoryPath(path);
-            dir.CreateOnDisk();
+
+            if (!dir.IsExists())
+            {
+                dir.CreateOnDisk();
+            }
 
             return dir;
         }

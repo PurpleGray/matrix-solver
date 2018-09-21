@@ -11,7 +11,7 @@ namespace MatrixSolver.Library.IO
         {
             if (IsDirectoryPath(path) == FSItemType.Directory)
             {
-                 return (DirectoryPath)DirectoryPath.Create(path);
+                 return (DirectoryPath)DirectoryPath.OpenOrCreate(path);
             }
                 
             throw new ArgumentException($"Provided path is not a folder");
