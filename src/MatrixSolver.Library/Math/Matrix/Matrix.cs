@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 {
@@ -68,7 +69,19 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            throw new NotImplementedException(); // TODO
+            StringBuilder strBuilder = new StringBuilder();
+
+            for (int i = 0; i < RowCount; i++)
+            {
+                for (int j = 0; j < ColumnCount; j++)
+                {
+                    strBuilder.Append($"{GetAt(i, j)} ");
+                }
+
+                strBuilder.Append('\n');
+            }
+
+            return strBuilder.ToString();
         }
 
         public bool Equals(Matrix<T> other)
