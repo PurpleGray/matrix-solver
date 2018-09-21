@@ -114,5 +114,16 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
                 }
             }
         }
+        
+        internal virtual void TransposeTo(MatrixDataContainer<T> target)
+        {
+            for (int j = 0; j < ColumnCount; j++)
+            {
+                for (int i = 0; i < RowCount; i++)
+                {
+                    target.SetAt(j, i, GetAt(i, j));
+                }
+            }
+        }
     }
 }

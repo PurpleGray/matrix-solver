@@ -61,9 +61,11 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 
         public Matrix<T> Transpose()
         {
-            throw new NotImplementedException(); // TODO
+            var result = Build.SameAs(this);
+            Storage.TransposeTo(result.Storage);
+            return result;
         }
-        
+
         public string ToString(string format, IFormatProvider formatProvider)
         {
             throw new NotImplementedException(); // TODO
