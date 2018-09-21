@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace MatrixSolver.Library.IO
@@ -22,6 +23,11 @@ namespace MatrixSolver.Library.IO
         public override bool IsExists()
         {
             return Directory.Exists(FSPath);
+        }
+
+        public IEnumerable<string> EnumerateFiles()
+        {
+            return Directory.EnumerateFiles(FSPath);
         }
         
         public static PathBase OpenOrCreate(string path)
