@@ -8,7 +8,7 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
     {
         public abstract T Zero { get; }
 
-        public abstract Matrix<T> FromArray(T[,] arr, int rowNumber, int colNumber);
+        public abstract Matrix<T> FromArray(T[,] arr);
 
         public abstract Matrix<T> FromFormattedString(string rawString);
 
@@ -21,9 +21,9 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
     {
         public override int Zero { get; } = 0;
         
-        public override Matrix<int> FromArray(int[,] arr, int rowNumber, int colNumber)
+        public override Matrix<int> FromArray(int[,] arr)
         {
-            return new Integer.Matrix(new MatrixDataContainer(rowNumber, colNumber, arr));
+            return new Integer.Matrix(MatrixDataContainer.OfArray(arr));
         }
 
         public override Matrix<int> FromFormattedString(string rawString)
@@ -33,7 +33,7 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 
         public override Matrix<int> FromDimensions(int rowCount, int columnCount)
         {
-            return new Integer.Matrix(new MatrixDataContainer(rowCount, columnCount));
+            return new Integer.Matrix(MatrixDataContainer.OfSize(rowCount, columnCount));
         }
 
         public override Matrix<int> SameAs(Matrix<int> matrix)
