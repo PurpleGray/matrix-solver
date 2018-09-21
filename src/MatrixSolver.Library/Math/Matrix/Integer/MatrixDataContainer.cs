@@ -31,5 +31,15 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer
             ValidateRange(row, column);
             Data[row, column] = value;
         }
+
+        public static MatrixDataContainer OfArray(int[,] arr)
+        {
+            return new MatrixDataContainer(arr.GetLength(0), arr.GetLength(1), arr);
+        }
+
+        public static MatrixDataContainer OfSize(int rows, int columns)
+        {
+            return new MatrixDataContainer(rows, columns);
+        }
     }
 }

@@ -81,5 +81,38 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
                 throw new ArgumentOutOfRangeException("column");
             }
         }
+        
+        public void CopyTo(MatrixDataContainer<T> target)
+        {
+            if (target == null)
+            {
+                throw new ArgumentNullException("target");
+            }
+
+            if (ReferenceEquals(this, target))
+            {
+                return;
+            }
+
+            if (RowCount != target.RowCount || ColumnCount != target.ColumnCount)
+            {
+                var message = $"Matrix dimensions must be the same, first is ({RowCount} x {ColumnCount}), " +
+                              $"second is ({target.RowCount} x {target.ColumnCount})";
+                throw new ArgumentException(message, "target");
+            }
+
+            CopyToUnchecked(target);
+        }
+
+        internal virtual void CopyToUnchecked(MatrixDataContainer<T> target)
+        {
+            for (int j = 0; j < ColumnCount; j++)
+            {
+                for (int i = 0; i < RowCount; i++)
+                {
+                    target.SetAt(i, j, GetAt(i, j));
+                }
+            }
+        }
     }
 }

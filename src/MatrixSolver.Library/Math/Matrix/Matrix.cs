@@ -46,13 +46,23 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
             return Storage.ToArray();
         }
 
-        protected abstract Matrix<T> Add(Matrix<T> rightMatrix);
+        public Matrix<T> Clone()
+        {
+            var result = Build.SameAs(this);
+            Storage.CopyTo(result.Storage);
+            return result;
+        }
+
+        protected abstract Matrix<T> Add(Matrix<T> other);
 
         protected abstract Matrix<T> Subtract(Matrix<T> other);
 
         protected abstract Matrix<T> Multiply(Matrix<T> other);
 
-        protected abstract Matrix<T> Transpose();
+        public Matrix<T> Transpose()
+        {
+            throw new NotImplementedException(); // TODO
+        }
         
         public string ToString(string format, IFormatProvider formatProvider)
         {

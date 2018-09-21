@@ -1,5 +1,6 @@
 using System;
 using System.Numerics;
+using MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer;
 
 namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 {
@@ -10,8 +11,12 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
         public abstract Matrix<T> FromArray(T[,] arr, int rowNumer, int colNumber);
 
         public abstract Matrix<T> FromFormattedString(string rawString);
-    }
 
+        public abstract Matrix<T> FromDimensions(int rowCount, int columnCount);
+
+        public abstract Matrix<T> SameAs(Matrix<T> matrix);
+    }
+    
     internal static class BuilderInstance<T> where T : struct, IEquatable<T>, IFormattable
     {
         static Lazy<MatrixBuilder<T>> _singleton =
