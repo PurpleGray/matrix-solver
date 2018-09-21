@@ -3,7 +3,7 @@ using System;
 namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 {
     public abstract partial class Matrix<T> : IFormattable, IEquatable<Matrix<T>>
-                                    where T : struct, IEquatable<T>, IFormattable, ICloneable
+                                    where T : struct, IEquatable<T>, IFormattable
     {
         protected Matrix(MatrixDataContainer<T> storage)
         {
@@ -13,6 +13,8 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
         }
         
         public MatrixDataContainer<T> Storage { get; private set; }
+        
+        public static readonly MatrixBuilder<T> Build = BuilderInstance<T>.Matrix;
         
         public int ColumnCount { get; private set; }
         

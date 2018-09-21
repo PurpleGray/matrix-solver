@@ -2,17 +2,17 @@ using System.Threading;
 
 namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer
 {
-    public class IntegerMatrixDataContainer : MatrixDataContainer<int>
+    public class MatrixDataContainer : MatrixDataContainer<int>
     {
         public readonly int[,] Data;
 
-        public IntegerMatrixDataContainer(int rowCount, int columnCount)
+        public MatrixDataContainer(int rowCount, int columnCount)
             : base(rowCount, columnCount)
         {
             Data = new int[rowCount, columnCount];
         }
 
-        public IntegerMatrixDataContainer(int rowCount, int columnCount, int[,] data)
+        public MatrixDataContainer(int rowCount, int columnCount, int[,] data)
             : base(rowCount, columnCount)
         {
             Data = data;
