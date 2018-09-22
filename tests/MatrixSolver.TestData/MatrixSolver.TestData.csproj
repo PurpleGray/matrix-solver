@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="TestMatrixes\1.txt" />
+      <EmbeddedResource Include="TestMatrixes\1.txt" />
+      <None Remove="TestMatrixes\2.txt" />
+      <EmbeddedResource Include="TestMatrixes\2.txt" />
+      <None Remove="TestMatrixes\3.txt" />
+      <EmbeddedResource Include="TestMatrixes\3.txt" />
+      <None Remove="TestMatrixes\4.txt" />
+      <EmbeddedResource Include="TestMatrixes\4.txt" />
+    </ItemGroup>
+
+</Project>
