@@ -19,6 +19,11 @@ namespace MatrixSolver.Library.IO
             file.Close();
         }
 
+        public override void Clear()
+        {
+            File.WriteAllText(FSPath, string.Empty);
+        }
+
         public void WriteToFile(string content)
         {
             File.WriteAllText(FSPath, content);

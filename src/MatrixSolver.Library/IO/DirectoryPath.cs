@@ -19,7 +19,15 @@ namespace MatrixSolver.Library.IO
         {
             Directory.CreateDirectory(FSPath);
         }
-        
+
+        public override void Clear()
+        {
+            foreach (var file in Directory.EnumerateFiles(FSPath))
+            {
+                File.Delete(Path.Combine(FSPath, file));
+            }
+        }
+
         public override bool IsExists()
         {
             return Directory.Exists(FSPath);
