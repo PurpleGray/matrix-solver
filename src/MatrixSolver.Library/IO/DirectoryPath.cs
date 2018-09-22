@@ -29,6 +29,18 @@ namespace MatrixSolver.Library.IO
         {
             return Directory.EnumerateFiles(FSPath);
         }
+
+        public FilePath OpenFile(string name)
+        {
+            var filePath = new FilePath(Path.Combine(FSPath, name));
+
+            if (filePath.IsExists())
+            {
+                return filePath;
+            }
+            
+            throw new FileNotFoundException();
+        }
         
         public static PathBase OpenOrCreate(string path)
         {

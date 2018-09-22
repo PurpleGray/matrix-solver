@@ -23,5 +23,15 @@ namespace MatrixSolver.Library.IO
         {
             File.WriteAllText(FSPath, content);
         }
+
+        public string ReadAllText()
+        {
+            return File.ReadAllText(FSPath);
+        }
+
+        public string[] ReadAllLines()
+        {
+            return File.ReadAllLines(FSPath);
+        }
     }
 }
