@@ -23,7 +23,7 @@ namespace MatrixSolver.Library.IO
 
         protected abstract void CreateOnDisk();
 
-        protected abstract void Clear();
+        public abstract void Clear();
         
         protected PathBase(string path)
         {

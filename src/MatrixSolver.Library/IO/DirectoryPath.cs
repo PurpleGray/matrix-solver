@@ -20,7 +20,7 @@ namespace MatrixSolver.Library.IO
             Directory.CreateDirectory(FSPath);
         }
 
-        protected override void Clear()
+        public override void Clear()
         {
             foreach (var file in Directory.EnumerateFiles(FSPath))
             {

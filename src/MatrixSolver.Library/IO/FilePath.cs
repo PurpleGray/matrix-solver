@@ -19,7 +19,7 @@ namespace MatrixSolver.Library.IO
             file.Close();
         }
 
-        protected override void Clear()
+        public override void Clear()
         {
             File.WriteAllText(FSPath, string.Empty);
         }
