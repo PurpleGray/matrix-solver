@@ -30,7 +30,7 @@ namespace MatrixSolver.Library.Utils
             
             for (var i = 2; i < fileLines.Length; i++)
             {
-                if (string.IsNullOrEmpty(fileLines[i].Trim()))
+                if (string.IsNullOrEmpty(fileLines[i].Trim()) || i + 1 == fileLines.Length)
                 {
                     matrixes.Add(Matrix<int>.Build
                         .FromFormattedString(rawMatrixBufer.Aggregate((s, s1) => $"{s}\r\n{s1}")));
@@ -57,7 +57,7 @@ namespace MatrixSolver.Library.Utils
                 }
                 case MatrixOperation.Multiply:
                 {
-                    var resultMtx = matrixes.Aggregate((mtx1, mtx2) => mtx1 - mtx2);
+                    var resultMtx = matrixes.Aggregate((mtx1, mtx2) => mtx1 * mtx2);
                     outResult.resultMatrixes.Add(resultMtx);
                     outResult.resultFile.WriteToFile(resultMtx.ToString());
                     break;
