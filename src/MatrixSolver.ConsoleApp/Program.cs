@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,14 +13,18 @@ namespace MatrixSolver.ConsoleApp
     {
         static void Main(string[] args)
         {
+            string directoryPath = null;
             if (args.Length == 0)
             {
-                Console.WriteLine("No directory to work with is being provided\r\n");
-                Console.ReadLine();
-                Environment.Exit(0);
+                Console.WriteLine("No directory path to work with is being provided\r\n" +
+                                  "Enter it in console then.");
+                directoryPath = Console.ReadLine();
+            }
+            else
+            {
+                directoryPath = args[0];
             }
 
-            var directoryPath = args[0];
             var mtxDir = FileSystemHelper.WorkWithFolder(directoryPath);
 
             CheckDirectoryValidity(mtxDir);
