@@ -14,11 +14,6 @@ namespace MatrixSolver.Library.IO
         /// </summary>
         public string PathItemName => System.IO.Path.GetFileName(FSPath);
 
-        /// <summary>
-        /// The fully qualified path string for the first path in the collection.
-        /// </summary>
-        public string FullPath => System.IO.Path.GetFullPath(FSPath);
-
         public abstract bool IsExists();
 
         protected abstract void CreateOnDisk();

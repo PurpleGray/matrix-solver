@@ -13,7 +13,7 @@ namespace MatrixSolver.Library.IO
         /// <summary>
         /// The name of the directory for the path
         /// </summary>
-        public string DirectoryName => System.IO.Path.GetDirectoryName(FSPath);
+        public string DirectoryName => new DirectoryInfo(FSPath).Name;
         
         protected override void CreateOnDisk()
         {
