@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Reflection;
 
 namespace MatrixSolver.TestData
@@ -11,7 +12,7 @@ namespace MatrixSolver.TestData
         
         public static Stream ReadStream(string name)
         {
-            return DataAssembly.GetManifestResourceStream("MatrixSolver.TestData.TestMatrixes" + name);
+            return DataAssembly.GetManifestResourceStream("MatrixSolver.TestData.TestMatrixes." + name);
         }
         
         public static TextReader ReadText(string name)
@@ -34,6 +35,11 @@ namespace MatrixSolver.TestData
             }
 
             return lines.ToArray();
+        }
+
+        public static string ReadAllText(string name)
+        {
+            return String.Join("", ReadAllLines(name));
         }
     }
 }
