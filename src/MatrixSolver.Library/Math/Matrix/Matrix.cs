@@ -17,26 +17,24 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
             ColumnCount = storage.ColumnCount;
         }
 
+        /// <summary>
+        /// Storage where all matrix data is hidden :)
+        /// </summary>
         public MatrixDataContainer<T> Storage { get; }
 
         public int ColumnCount { get; }
 
         public int RowCount { get; }
 
+        /// <summary>
+        /// Data accessor by row and column indexes, with range checking
+        /// </summary>
+        /// <param name="row">Requested row</param>
+        /// <param name="column">Requested column</param>
         public T this[int row, int column]
         {
             get => Storage[row, column];
             set => Storage[row, column] = value;
-        }
-
-        public bool Equals(Matrix<T> other)
-        {
-            return other != null && Storage.Equals(other.Storage);
-        }
-
-        public string ToString(string format, IFormatProvider formatProvider)
-        {
-            return ToString();
         }
 
         public T GetAt(int row, int column)
@@ -59,10 +57,25 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
             return Storage.ToArray();
         }
 
+        /// <summary>
+        /// Make a copy of current matrix
+        /// </summary>
+        /// <returns>Full copy (data too) of current matrix</returns>
         public Matrix<T> Clone()
         {
             var result = Build.SameAs(this);
             Storage.CopyTo(result.Storage);
+            return result;
+        }
+        
+        /// <summary>
+        /// Transpose current matrix
+        /// </summary>
+        /// <returns></returns>
+        public Matrix<T> Transpose()
+        {
+            var result = Build.FromDimensions(ColumnCount, RowCount);
+            Storage.TransposeTo(result.Storage);
             return result;
         }
 
@@ -72,13 +85,20 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 
         protected abstract Matrix<T> Multiply(Matrix<T> other);
 
-        public Matrix<T> Transpose()
+        public bool Equals(Matrix<T> other)
         {
-            var result = Build.FromDimensions(ColumnCount, RowCount);
-            Storage.TransposeTo(result.Storage);
-            return result;
+            return other != null && Storage.Equals(other.Storage);
         }
 
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            return ToString();
+        }
+        
+        /// <summary>
+        /// Formatting matrix to string representation
+        /// </summary>
+        /// <returns>String</returns>
         public override string ToString()
         {
             var strBuilder = new StringBuilder();
