@@ -5,6 +5,7 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer
 {
     public class MatrixBuilder : MatrixBuilder<int>
     {
+        // For random matrix generation
         private readonly RandomDataGenerator RandomGenerator = new RandomDataGenerator();
         public override int Zero { get; } = 0;
 
@@ -13,6 +14,11 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer
             return new Matrix(MatrixDataContainer.OfArray(arr));
         }
 
+        /// <summary>
+        /// Creates matrix from specially formatted string
+        /// </summary>
+        /// <param name="rawString">Example: 3 4 5\r\n2 1 4\r\n4 9 3</param>
+        /// <returns>Matrix</returns>
         public override Matrix<int> FromFormattedString(string rawString)
         {
             // Delimit string by rows
@@ -26,9 +32,11 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer
             // Fill the matrix storage
             for (var i = 0; i < strRows.Length; i++)
             {
+                // Get column values
                 var columnValues =
                     strRows[i].Trim().Split(new[] {' ', '\t'}, StringSplitOptions.RemoveEmptyEntries);
 
+                // Fill row
                 for (var j = 0; j < columnValues.Length; j++)
                 {
                     matrixContainer.SetAt(i, j, int.Parse(columnValues[j]));

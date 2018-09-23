@@ -3,6 +3,9 @@ using MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer;
 
 namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 {
+    /// <summary>
+    /// Matrix builder class which helps to create matrixes differently
+    /// </summary>
     public abstract class MatrixBuilder<T> where T : struct, IEquatable<T>, IFormattable
     {
         public abstract T Zero { get; }
@@ -20,6 +23,9 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
         public abstract Matrix<T> Random(int rowCount, int columnCount, T minVal, T maxVal);
     }
 
+    /// <summary>
+    /// BuilderInstance which will return correct MatrixBuilder for provided type
+    /// </summary>
     internal static class BuilderInstance<T> where T : struct, IEquatable<T>, IFormattable
     {
         private static Lazy<MatrixBuilder<T>> _singleton =
