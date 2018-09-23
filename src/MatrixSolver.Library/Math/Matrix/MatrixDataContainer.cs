@@ -27,6 +27,15 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
             ColumnCount = columnCount;
         }
 
+        /// <summary>
+        /// Gets or sets the value at the given row and column, with range validation
+        /// </summary>
+        /// <param name="row">
+        /// The row of the element
+        /// </param>
+        /// <param name="column">
+        /// The column of the element
+        /// </param>
         public T this[int row, int column]
         {
             get
@@ -42,44 +51,34 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
             }
         }
 
-        public bool Equals(MatrixDataContainer<T> other)
-        {
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (ColumnCount != other.ColumnCount || RowCount != other.RowCount)
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            // Perform element wise comparison.
-            for (var i = 0; i < RowCount; i++)
-            {
-                for (var j = 0; j < ColumnCount; j++)
-                {
-                    var item = GetAt(i, j);
-                    var otherItem = other.GetAt(i, j);
-                    if (!item.Equals(otherItem))
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
-        }
-
+        /// <summary>
+        /// Retrieves the requested element
+        /// </summary>
+        /// <param name="row">
+        /// The row of the element
+        /// </param>
+        /// <param name="column">
+        /// The column of the element
+        /// </param>
+        /// <returns>
+        /// The requested element
+        /// </returns>
         public abstract T GetAt(int row, int column);
 
+        /// <summary>
+        /// Sets the element
+        /// </summary>
+        /// <param name="row">
+        /// The row of the element
+        /// </param>
+        /// <param name="column">
+        /// The column of the element
+        /// </param>
         public abstract void SetAt(int row, int column, T value);
 
+        /// <summary>
+        /// Clear current storage
+        /// </summary>
         public virtual void Clear()
         {
             for (var i = 0; i < RowCount; i++)
@@ -91,6 +90,10 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
             }
         }
 
+        /// <summary>
+        /// Get the two-dimensional array of elements stored in this container
+        /// </summary>
+        /// <returns>Array of elements</returns>
         public virtual T[,] ToArray()
         {
             var retArr = new T[RowCount, ColumnCount];
@@ -105,6 +108,12 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
             return retArr;
         }
 
+        /// <summary>
+        /// Checks that provided indexes is in the correct ranges
+        /// </summary>
+        /// <param name="row">Requested row</param>
+        /// <param name="column">Requested column</param>
+        /// <exception cref="ArgumentOutOfRangeException">If not in range</exception>
         protected void ValidateRange(int row, int column)
         {
             if (row < 0 || row >= RowCount)
@@ -118,6 +127,13 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
             }
         }
 
+        /// <summary>
+        /// Copies all data from this container to another with
+        /// range checking
+        /// </summary>
+        /// <param name="target">Target container</param>
+        /// <exception cref="ArgumentNullException">If target is null</exception>
+        /// <exception cref="ArgumentException">If dimensions of containers are not the same</exception>
         public void CopyTo(MatrixDataContainer<T> target)
         {
             if (target == null)
@@ -151,6 +167,10 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
             }
         }
 
+        /// <summary>
+        /// Transposes data from current container to another
+        /// </summary>
+        /// <param name="target">Target container</param>
         internal virtual void TransposeTo(MatrixDataContainer<T> target)
         {
             for (var j = 0; j < ColumnCount; j++)
@@ -165,6 +185,45 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
         public sealed override bool Equals(object obj)
         {
             return Equals(obj as MatrixDataContainer<T>);
+        }
+        
+        /// <summary>
+        /// Checks equality of two containers
+        /// </summary>
+        /// <param name="other">Other container</param>
+        /// <returns>True if data is equals</returns>
+        public bool Equals(MatrixDataContainer<T> other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (ColumnCount != other.ColumnCount || RowCount != other.RowCount)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            // Perform element wise comparison.
+            for (var i = 0; i < RowCount; i++)
+            {
+                for (var j = 0; j < ColumnCount; j++)
+                {
+                    var item = GetAt(i, j);
+                    var otherItem = other.GetAt(i, j);
+                    if (!item.Equals(otherItem))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         public override int GetHashCode()
