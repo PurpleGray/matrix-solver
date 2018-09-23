@@ -21,7 +21,9 @@ namespace MatrixSolver.Library.Utils
             this FilePath matrixFile)
         {
             var resultFileName = $"{Path.GetFileNameWithoutExtension(matrixFile.FSPath)}_result.txt";
-            var resultFile = new FilePath(Path.Combine(matrixFile.DirectoryPath, resultFileName));
+            var resultFolder = FileSystemHelper.WorkWithFolder(Path.Combine(matrixFile.DirectoryPath,
+                "Results"));
+            var resultFile = new FilePath(Path.Combine(resultFolder.FSPath, resultFileName));
 
             try
             {
