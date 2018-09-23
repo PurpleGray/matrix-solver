@@ -16,6 +16,12 @@ namespace MatrixSolver.Library.IO
             throw new ArgumentException("Provided path is not a folder");
         }
 
+        /// <summary>
+        /// Determines the type of provided path on disk
+        /// </summary>
+        /// <param name="path">File system path</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">If path is null</exception>
         private static FSItemType IsDirectoryPath(string path)
         {
             if (path == null)

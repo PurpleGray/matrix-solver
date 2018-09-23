@@ -13,6 +13,9 @@ namespace MatrixSolver.ConsoleApp
         private static void Main(string[] args)
         {
             string directoryPath = null;
+            
+            // If path is not provided in startup args
+            // trying to get them from console itself
             if (args.Length == 0)
             {
                 Console.WriteLine("No directory path to work with is being provided\r\n" +
@@ -25,12 +28,14 @@ namespace MatrixSolver.ConsoleApp
             }
 
             var mtxDir = FileSystemHelper.WorkWithFolder(directoryPath);
-
+            
+            // Check if Directory is exists and contains needed files
             CheckDirectoryValidity(mtxDir);
 
             var anyErrorsFlag = false;
             var problematicFiles = new List<string>();
 
+            // Process files and gather errors, if occurred
             foreach (var matrixFile in mtxDir.EnumerateFiles("*.txt"))
             {
                 var fileProcessingResult = matrixFile.ProcessMatrixFile();
@@ -59,10 +64,13 @@ namespace MatrixSolver.ConsoleApp
             }
 
             // Move result files to the same folder
+            // NOTE: this done because of performance reasons. At this time we are enumerating files in folder,
+            // not just gather them all in memory and process. This can be optimized in future by multithreading, I think
             var resultsDir = FileSystemHelper.WorkWithFolder(Path.Combine(directoryPath, "Results"));
             resultsDir.MoveAllFiles(mtxDir);
             resultsDir.Delete();
 
+            // Show filenames with problems
             if (anyErrorsFlag)
             {
                 Console.WriteLine(

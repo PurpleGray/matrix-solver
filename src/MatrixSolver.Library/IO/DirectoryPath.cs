@@ -11,7 +11,7 @@ namespace MatrixSolver.Library.IO
         }
 
         /// <summary>
-        ///     The name of the directory for the path
+        /// The name of the directory for the path
         /// </summary>
         public string DirectoryName => new DirectoryInfo(FSPath).Name;
 
@@ -20,6 +20,9 @@ namespace MatrixSolver.Library.IO
             Directory.CreateDirectory(FSPath);
         }
 
+        /// <summary>
+        /// Deletes all the files in directory
+        /// </summary>
         public override void Clear()
         {
             foreach (var file in Directory.EnumerateFiles(FSPath))
@@ -73,6 +76,9 @@ namespace MatrixSolver.Library.IO
             return new FilePath(Path.Combine(FSPath, name));
         }
 
+        /// <summary>
+        /// Moves all the files to destination directory
+        /// </summary>
         public void MoveAllFiles(DirectoryPath destination)
         {
             if (!destination.IsExists())

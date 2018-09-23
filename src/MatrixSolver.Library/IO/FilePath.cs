@@ -8,6 +8,9 @@ namespace MatrixSolver.Library.IO
         {
         }
 
+        /// <summary>
+        /// Path to directory where file is
+        /// </summary>
         public string DirectoryPath => Path.GetDirectoryName(FSPath);
 
         public override bool IsExists()
