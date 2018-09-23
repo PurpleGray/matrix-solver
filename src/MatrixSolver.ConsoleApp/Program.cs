@@ -53,6 +53,11 @@ namespace MatrixSolver.ConsoleApp
 
                 Console.WriteLine($"Calculation process for file {matrixFile.PathItemName} is completed successfully!");
             }
+            
+            // Move result files to the same folder
+            var resultsDir = FileSystemHelper.WorkWithFolder(Path.Combine(directoryPath, "Results"));
+            resultsDir.MoveAllFiles(mtxDir);
+            resultsDir.Delete();
 
             if (anyErrorsFlag)
             {
