@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using MatrixSolver.Library.IO;
 using MatrixSolver.Library.Math.LinearAlgebra.Matrix;
+using MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer;
 
 namespace MatrixSolver.Library.Utils
 {
@@ -30,13 +31,19 @@ namespace MatrixSolver.Library.Utils
             
             for (var i = 2; i < fileLines.Length; i++)
             {
-                if (string.IsNullOrEmpty(fileLines[i].Trim()) || i + 1 == fileLines.Length)
+                if (string.IsNullOrEmpty(fileLines[i].Trim()))
                 {
                     matrixes.Add(Matrix<int>.Build
                         .FromFormattedString(rawMatrixBufer.Aggregate((s, s1) => $"{s}\r\n{s1}")));
                     rawMatrixBufer.Clear();
                 }
                 rawMatrixBufer.Add(fileLines[i]);
+            }
+
+            if (rawMatrixBufer.Any())
+            {
+                matrixes.Add(Matrix<int>.Build
+                    .FromFormattedString(rawMatrixBufer.Aggregate((s, s1) => $"{s}\r\n{s1}")));
             }
 
             switch (mtxOperation)
