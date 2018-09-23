@@ -12,7 +12,7 @@ namespace MatrixSolver.Library.Tests
 {
     public class IOTests
     {
-        public static readonly string MatrixesTestFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Matrixes");
+        public static readonly string MatrixesTestFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MatrixesIOTest");
         
         [Fact]
         public void WriteOnDiskTest()
