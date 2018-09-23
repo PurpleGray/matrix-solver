@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Net;
 
 namespace MatrixSolver.Library.IO
@@ -34,16 +35,12 @@ namespace MatrixSolver.Library.IO
                 return FSItemType.File;
             }
             
-            FileAttributes attr = File.GetAttributes(path);
+            // if has trailing slash then it's a directory
+            if (new[] {Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar}.Any(x => path.EndsWith(x)))
+                return FSItemType.Directory; // ends with slash
 
-            if (attr.HasFlag(FileAttributes.Directory))
-            {
-                return FSItemType.Directory;
-            }
-            else
-            {
-                return FSItemType.File;
-            }
+            // if has extension then its a file; directory otherwise
+            return string.IsNullOrWhiteSpace(Path.GetExtension(path)) ? FSItemType.Directory : FSItemType.File;
         }
     }
 }
