@@ -7,7 +7,59 @@ namespace MatrixSolver.Library.Tests
     {
         private string matrixStrSample1 = "2 5 6 99\r\n8 55 6 9\r\n7 8 5 56";
         private string matrixStrSample2 = "59 48 65\r\n59 141 56\r\n5 5 6";
+        private string matrixStrSample3 = "10 2 42\r\n72 13 53\r\n16 39 12";
+        private string matrixStrSample4 = "59 48 65\r\n59 141 56\r\n5 5 6\r\n14 28 1";
+
+        /// <summary>
+        /// Result of matrixStrSample2 + matrixStrSample3
+        /// </summary>
+        private Matrix<int> AdditionResultSample = Matrix<int>.Build.FromArray(new int[,]
+        {
+            { 69, 50, 107 },
+            { 131, 154, 109 },
+            { 21, 44, 18 }
+        });
+
+        /// <summary>
+        /// Result of matrixStrSample2 - matrixStrSample3
+        /// </summary>
+        private Matrix<int> SubtractionResultSample = Matrix<int>.Build.FromArray(new int[,]
+        {
+            {49, 46, 23},
+            {-13, 128, 3},
+            {-11, -34, -6}
+        });
+
+        /// <summary>
+        /// Result of matrixStrSample1 * matrixStrSample4
+        /// </summary>
+        private Matrix<int> MultiplyResultSample = Matrix<int>.Build.FromArray(new int[,]
+        {
+            {1829, 3603, 545},
+            {3873, 8421, 3645},
+            {1694, 3057, 989}
+        });
         
+        /// <summary>
+        /// Result of matrixStrSample2 * matrixStrSample3
+        /// </summary>
+        private Matrix<int> MultiplyResultSample2 = Matrix<int>.Build.FromArray(new int[,]
+        {
+            {5086, 3277, 5802},
+            {11638, 4135, 10623},
+            {506, 309, 547}
+        });
+
+        /// <summary>
+        /// Result of transpose matrixStrSample2
+        /// </summary>
+        private Matrix<int> TransposedMatrixSample = Matrix<int>.Build.FromArray(new int[,]
+        {
+            {59, 59, 5},
+            {48, 141, 5},
+            {65, 56, 6}
+        });
+
         [Fact]
         public void TestMatrixInit()
         {
@@ -39,6 +91,35 @@ namespace MatrixSolver.Library.Tests
             Assert.Equal(4, formattedStrMtx.ColumnCount);
             Assert.Equal(3, formattedStrMtx.RowCount);
             Assert.Equal(56, formattedStrMtx.GetAt(2, 3));
+        }
+
+        [Fact]
+        public void TestMatrixOperations()
+        {
+            var mtx1 = Matrix<int>.Build.FromFormattedString(matrixStrSample1);
+            var mtx2 = Matrix<int>.Build.FromFormattedString(matrixStrSample2);
+            var mtx3 = Matrix<int>.Build.FromFormattedString(matrixStrSample3);
+            var mtx4 = Matrix<int>.Build.FromFormattedString(matrixStrSample4);
+
+            // Test addition
+            var addRes = mtx2 + mtx3;
+            Assert.True(addRes.Equals(AdditionResultSample));
+
+            // Test subtract
+            var subRes = mtx2 - mtx3;
+            Assert.True(subRes.Equals(SubtractionResultSample));
+
+            // Test mul with different dimensions matrixes
+            var mulRes = mtx1 * mtx4;
+            Assert.True(mulRes.Equals(MultiplyResultSample));
+
+            // Test mul with equal dim matrixes
+            var mulRes2 = mtx2 * mtx3;
+            Assert.True(mulRes2.Equals(MultiplyResultSample2));
+
+            // Test transpose
+            var transRes = mtx2.Transpose();
+            Assert.True(transRes.Equals(TransposedMatrixSample));
         }
     }
 }
