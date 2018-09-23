@@ -24,9 +24,19 @@ namespace MatrixSolver.Library.IO
             File.WriteAllText(FSPath, string.Empty);
         }
 
+        public void Delete()
+        {
+            File.Delete(FSPath);
+        }
+        
         public void WriteToFile(string content)
         {
             File.WriteAllText(FSPath, content);
+        }
+
+        public void WriteLines(string[] content)
+        {
+            File.WriteAllLines(FSPath, content);
         }
 
         public string ReadAllText()

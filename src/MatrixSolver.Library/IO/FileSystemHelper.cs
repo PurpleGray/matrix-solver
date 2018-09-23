@@ -40,7 +40,7 @@ namespace MatrixSolver.Library.IO
                 return FSItemType.Directory; // ends with slash
 
             // if has extension then its a file; directory otherwise
-            return string.IsNullOrWhiteSpace(Path.GetExtension(path)) ? FSItemType.File : FSItemType.Directory;
+            return string.IsNullOrWhiteSpace(Path.GetExtension(path)) ? FSItemType.Directory : FSItemType.File;
         }
     }
 }
