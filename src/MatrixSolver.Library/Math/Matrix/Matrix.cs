@@ -1,8 +1,10 @@
 using System;
+using System.Diagnostics;
 using System.Text;
 
 namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 {
+    [DebuggerDisplay("Matrix {RowCount}x{ColumnCount}")]
     public abstract partial class Matrix<T> : IFormattable, IEquatable<Matrix<T>>
                                     where T : struct, IEquatable<T>, IFormattable
     {
@@ -62,12 +64,12 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 
         public Matrix<T> Transpose()
         {
-            var result = Build.SameAs(this);
+            var result = Build.FromDimensions(ColumnCount, RowCount);
             Storage.TransposeTo(result.Storage);
             return result;
         }
 
-        public string ToString(string format, IFormatProvider formatProvider)
+        public override string ToString()
         {
             StringBuilder strBuilder = new StringBuilder();
 
@@ -78,10 +80,15 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
                     strBuilder.Append($"{GetAt(i, j)} ");
                 }
 
-                strBuilder.Append('\n');
+                strBuilder.Append("\r\n");
             }
 
             return strBuilder.ToString();
+        }
+        
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            return ToString();
         }
 
         public bool Equals(Matrix<T> other)

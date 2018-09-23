@@ -54,7 +54,7 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer
 
         protected override Matrix<int> Multiply(Matrix<int> other)
         {
-            if (ColumnCount != other.RowCount || other.RowCount != RowCount || other.ColumnCount != other.ColumnCount)
+            if (ColumnCount != other.RowCount)
             {
                 throw new ArgumentOutOfRangeException("Error while trying to Add two matrixes, dimensions are not compatible " +
                                                       $"({this.RowCount} x {this.ColumnCount}, " +
