@@ -53,9 +53,9 @@ namespace MatrixSolver.Library.IO
             File.Delete(Path.Combine(FSPath, name));
         }
 
-        public IEnumerable<FilePath> EnumerateFiles()
+        public IEnumerable<FilePath> EnumerateFiles(string extensionPattern = null)
         {
-            return Directory.EnumerateFiles(FSPath).Select(_ => new FilePath(_));
+            return Directory.EnumerateFiles(FSPath, extensionPattern).Select(_ => new FilePath(_));
         }
 
         public FilePath ForFile(string name)
