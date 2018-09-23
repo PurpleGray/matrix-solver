@@ -4,14 +4,13 @@ using System.IO;
 using System.Linq;
 using MatrixSolver.Library.IO;
 using MatrixSolver.Library.Math.LinearAlgebra.Matrix;
-using MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer;
 
 namespace MatrixSolver.Library.Utils
 {
     public static class MatrixHelper
     {
         private static readonly Dictionary<string, MatrixOperation> MtxOperations =
-            new Dictionary<string, MatrixOperation>()
+            new Dictionary<string, MatrixOperation>
             {
                 {"add", MatrixOperation.Add}, {"subtract", MatrixOperation.Subtract},
                 {"multiply", MatrixOperation.Multiply}, {"transpose", MatrixOperation.Transpose}

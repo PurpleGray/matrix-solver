@@ -6,14 +6,6 @@ namespace MatrixSolver.Library.Utils
 {
     public class MatrixFileProcessingResult
     {
-        public FilePath ResultFile { get; }
-        
-        public IList<Matrix<int>> ResultMatrixes { get; }
-        
-        public bool Success { get; }
-        
-        public string ErrorMessage { get; }
-
         public MatrixFileProcessingResult(FilePath resultFile, IList<Matrix<int>> resMatrixes,
             bool success, string errorMessage)
         {
@@ -22,5 +14,13 @@ namespace MatrixSolver.Library.Utils
             Success = success;
             ErrorMessage = errorMessage;
         }
+
+        public FilePath ResultFile { get; }
+
+        public IList<Matrix<int>> ResultMatrixes { get; }
+
+        public bool Success { get; }
+
+        public string ErrorMessage { get; }
     }
 }

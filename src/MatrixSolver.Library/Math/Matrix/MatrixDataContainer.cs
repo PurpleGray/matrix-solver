@@ -6,10 +6,10 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
         where T : struct, IEquatable<T>, IFormattable
     {
         protected static readonly T Zero = BuilderInstance<T>.Matrix.Zero;
-        
-        public readonly int RowCount;
 
         public readonly int ColumnCount;
+
+        public readonly int RowCount;
 
         protected MatrixDataContainer(int rowCount, int columnCount)
         {
@@ -26,11 +26,7 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
             RowCount = rowCount;
             ColumnCount = columnCount;
         }
-        
-        public abstract T GetAt(int row, int column);
-        
-        public abstract void SetAt(int row, int column, T value);
-        
+
         public T this[int row, int column]
         {
             get
@@ -46,6 +42,44 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
             }
         }
 
+        public bool Equals(MatrixDataContainer<T> other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (ColumnCount != other.ColumnCount || RowCount != other.RowCount)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            // Perform element wise comparison.
+            for (var i = 0; i < RowCount; i++)
+            {
+                for (var j = 0; j < ColumnCount; j++)
+                {
+                    var item = GetAt(i, j);
+                    var otherItem = other.GetAt(i, j);
+                    if (!item.Equals(otherItem))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        public abstract T GetAt(int row, int column);
+
+        public abstract void SetAt(int row, int column, T value);
+
         public virtual void Clear()
         {
             for (var i = 0; i < RowCount; i++)
@@ -60,16 +94,17 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
         public virtual T[,] ToArray()
         {
             var retArr = new T[RowCount, ColumnCount];
-            for (int i = 0; i < RowCount; i++)
+            for (var i = 0; i < RowCount; i++)
             {
-                for (int j = 0; j < ColumnCount; j++)
+                for (var j = 0; j < ColumnCount; j++)
                 {
                     retArr[i, j] = GetAt(i, j);
                 }
             }
+
             return retArr;
         }
-        
+
         protected void ValidateRange(int row, int column)
         {
             if (row < 0 || row >= RowCount)
@@ -82,7 +117,7 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
                 throw new ArgumentOutOfRangeException("column");
             }
         }
-        
+
         public void CopyTo(MatrixDataContainer<T> target)
         {
             if (target == null)
@@ -107,57 +142,24 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 
         internal virtual void CopyToUnchecked(MatrixDataContainer<T> target)
         {
-            for (int j = 0; j < ColumnCount; j++)
+            for (var j = 0; j < ColumnCount; j++)
             {
-                for (int i = 0; i < RowCount; i++)
+                for (var i = 0; i < RowCount; i++)
                 {
                     target.SetAt(i, j, GetAt(i, j));
                 }
             }
         }
-        
+
         internal virtual void TransposeTo(MatrixDataContainer<T> target)
         {
-            for (int j = 0; j < ColumnCount; j++)
+            for (var j = 0; j < ColumnCount; j++)
             {
-                for (int i = 0; i < RowCount; i++)
+                for (var i = 0; i < RowCount; i++)
                 {
                     target.SetAt(j, i, GetAt(i, j));
                 }
             }
-        }
-
-        public bool Equals(MatrixDataContainer<T> other)
-        {
-            if (other == null)
-            {
-                return false;
-            }
-            if (ColumnCount != other.ColumnCount || RowCount != other.RowCount)
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            // Perform element wise comparison.
-            for (int i = 0; i < RowCount; i++)
-            {
-                for (int j = 0; j < ColumnCount; j++)
-                {
-                    var item = GetAt(i, j);
-                    var otherItem = other.GetAt(i, j);
-                    if (!item.Equals(otherItem))
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
         }
 
         public sealed override bool Equals(object obj)
@@ -167,17 +169,18 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 
         public override int GetHashCode()
         {
-            var hashNum = System.Math.Min(RowCount*ColumnCount, 25);
-            int hash = 17;
+            var hashNum = System.Math.Min(RowCount * ColumnCount, 25);
+            var hash = 17;
             unchecked
             {
                 for (var i = 0; i < hashNum; i++)
                 {
                     int col;
-                    int row = System.Math.DivRem(i, ColumnCount, out col);
-                    hash = hash*31 + GetAt(row, col).GetHashCode();
+                    var row = System.Math.DivRem(i, ColumnCount, out col);
+                    hash = hash * 31 + GetAt(row, col).GetHashCode();
                 }
             }
+
             return hash;
         }
     }

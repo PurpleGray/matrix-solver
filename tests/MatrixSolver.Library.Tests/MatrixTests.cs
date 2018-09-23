@@ -5,25 +5,25 @@ namespace MatrixSolver.Library.Tests
 {
     public class MatrixTests
     {
-        private string matrixStrSample1 = "2 5 6 99\r\n8 55 6 9\r\n7 8 5 56";
-        private string matrixStrSample2 = "59 48 65\r\n59 141 56\r\n5 5 6";
-        private string matrixStrSample3 = "10 2 42\r\n72 13 53\r\n16 39 12";
-        private string matrixStrSample4 = "59 48 65\r\n59 141 56\r\n5 5 6\r\n14 28 1";
+        private readonly string matrixStrSample1 = "2 5 6 99\r\n8 55 6 9\r\n7 8 5 56";
+        private readonly string matrixStrSample2 = "59 48 65\r\n59 141 56\r\n5 5 6";
+        private readonly string matrixStrSample3 = "10 2 42\r\n72 13 53\r\n16 39 12";
+        private readonly string matrixStrSample4 = "59 48 65\r\n59 141 56\r\n5 5 6\r\n14 28 1";
 
         /// <summary>
-        /// Result of matrixStrSample2 + matrixStrSample3
+        ///     Result of matrixStrSample2 + matrixStrSample3
         /// </summary>
-        private Matrix<int> AdditionResultSample = Matrix<int>.Build.FromArray(new int[,]
+        private readonly Matrix<int> AdditionResultSample = Matrix<int>.Build.FromArray(new[,]
         {
-            { 69, 50, 107 },
-            { 131, 154, 109 },
-            { 21, 44, 18 }
+            {69, 50, 107},
+            {131, 154, 109},
+            {21, 44, 18}
         });
 
         /// <summary>
-        /// Result of matrixStrSample2 - matrixStrSample3
+        ///     Result of matrixStrSample2 - matrixStrSample3
         /// </summary>
-        private Matrix<int> SubtractionResultSample = Matrix<int>.Build.FromArray(new int[,]
+        private readonly Matrix<int> SubtractionResultSample = Matrix<int>.Build.FromArray(new[,]
         {
             {49, 46, 23},
             {-13, 128, 3},
@@ -31,19 +31,19 @@ namespace MatrixSolver.Library.Tests
         });
 
         /// <summary>
-        /// Result of matrixStrSample1 * matrixStrSample4
+        ///     Result of matrixStrSample1 * matrixStrSample4
         /// </summary>
-        private Matrix<int> MultiplyResultSample = Matrix<int>.Build.FromArray(new int[,]
+        private readonly Matrix<int> MultiplyResultSample = Matrix<int>.Build.FromArray(new[,]
         {
             {1829, 3603, 545},
             {3873, 8421, 3645},
             {1694, 3057, 989}
         });
-        
+
         /// <summary>
-        /// Result of matrixStrSample2 * matrixStrSample3
+        ///     Result of matrixStrSample2 * matrixStrSample3
         /// </summary>
-        private Matrix<int> MultiplyResultSample2 = Matrix<int>.Build.FromArray(new int[,]
+        private readonly Matrix<int> MultiplyResultSample2 = Matrix<int>.Build.FromArray(new[,]
         {
             {5086, 3277, 5802},
             {11638, 4135, 10623},
@@ -51,9 +51,9 @@ namespace MatrixSolver.Library.Tests
         });
 
         /// <summary>
-        /// Result of transpose matrixStrSample2
+        ///     Result of transpose matrixStrSample2
         /// </summary>
-        private Matrix<int> TransposedMatrixSample = Matrix<int>.Build.FromArray(new int[,]
+        private readonly Matrix<int> TransposedMatrixSample = Matrix<int>.Build.FromArray(new[,]
         {
             {59, 59, 5},
             {48, 141, 5},
@@ -64,7 +64,7 @@ namespace MatrixSolver.Library.Tests
         public void TestMatrixInit()
         {
             var randMtx = Matrix<int>.Build.Random(5, 5, 0, 150);
-            var arrMtx = Matrix<int>.Build.FromArray(new int[,]
+            var arrMtx = Matrix<int>.Build.FromArray(new[,]
             {
                 {0, 1, 2},
                 {3, 4, 5},
@@ -77,16 +77,16 @@ namespace MatrixSolver.Library.Tests
             // Test random mtx
             Assert.Equal(5, randMtx.ColumnCount);
             Assert.InRange(randMtx.GetAt(1, 3), 0, 150);
-            
+
             // Test arr mtx
             Assert.Equal(3, arrMtx.ColumnCount);
             Assert.Equal(3, arrMtx.RowCount);
             Assert.Equal(4, arrMtx.GetAt(1, 1));
-            
+
             // Test simple mtx
             Assert.Equal(7, simpleMtx.ColumnCount);
             Assert.Equal(7, simpleMtx.RowCount);
-            
+
             // Test formatted string matrix
             Assert.Equal(4, formattedStrMtx.ColumnCount);
             Assert.Equal(3, formattedStrMtx.RowCount);

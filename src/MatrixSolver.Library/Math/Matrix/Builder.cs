@@ -1,5 +1,4 @@
 using System;
-using System.Numerics;
 using MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer;
 
 namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
@@ -23,14 +22,16 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 
     internal static class BuilderInstance<T> where T : struct, IEquatable<T>, IFormattable
     {
-        static Lazy<MatrixBuilder<T>> _singleton =
+        private static Lazy<MatrixBuilder<T>> _singleton =
             new Lazy<MatrixBuilder<T>>(Create);
 
-        static MatrixBuilder<T> Create()
+        public static MatrixBuilder<T> Matrix => _singleton.Value;
+
+        private static MatrixBuilder<T> Create()
         {
             if (typeof(T) == typeof(int))
             {
-                return (MatrixBuilder<T>)(object)new Integer.MatrixBuilder();
+                return (MatrixBuilder<T>)(object)new MatrixBuilder();
             }
 
             // In further releases implement other types
@@ -42,11 +43,6 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
         public static void Register(MatrixBuilder<T> matrixBuilder)
         {
             _singleton = new Lazy<MatrixBuilder<T>>(() => matrixBuilder);
-        }
-
-        public static MatrixBuilder<T> Matrix
-        {
-            get { return _singleton.Value; }
         }
     }
 }

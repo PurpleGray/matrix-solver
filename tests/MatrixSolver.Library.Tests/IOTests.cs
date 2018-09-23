@@ -1,19 +1,17 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using MatrixSolver.Library.IO;
 using MatrixSolver.TestData;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Xunit;
 
 namespace MatrixSolver.Library.Tests
 {
     public class IOTests
     {
-        public static readonly string MatrixesTestFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MatrixesIOTest");
-        
+        public static readonly string MatrixesTestFolderPath =
+            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MatrixesIOTest");
+
         [Fact]
         public void WriteOnDiskTest()
         {
@@ -29,7 +27,8 @@ namespace MatrixSolver.Library.Tests
 
             // Check that all files has been written
             var writtenFiles = mtxFolder.EnumerateFiles();
-            Assert.True(writtenFiles.All(file => MatrixesTestData.TestFiles.Any(pair => pair.Key == file.PathItemName)));
+            Assert.True(writtenFiles.All(file =>
+                MatrixesTestData.TestFiles.Any(pair => pair.Key == file.PathItemName)));
 
             bool CheckFilesContent()
             {
@@ -45,7 +44,7 @@ namespace MatrixSolver.Library.Tests
 
                 return true;
             }
-            
+
             // Check that content of these files is correct
             Assert.True(CheckFilesContent());
         }

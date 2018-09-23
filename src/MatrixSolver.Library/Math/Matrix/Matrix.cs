@@ -6,44 +6,54 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 {
     [DebuggerDisplay("Matrix {RowCount}x{ColumnCount}")]
     public abstract partial class Matrix<T> : IFormattable, IEquatable<Matrix<T>>
-                                    where T : struct, IEquatable<T>, IFormattable
+        where T : struct, IEquatable<T>, IFormattable
     {
+        public static readonly MatrixBuilder<T> Build = BuilderInstance<T>.Matrix;
+
         protected Matrix(MatrixDataContainer<T> storage)
         {
             Storage = storage;
             RowCount = storage.RowCount;
             ColumnCount = storage.ColumnCount;
         }
-        
-        public MatrixDataContainer<T> Storage { get; private set; }
-        
-        public static readonly MatrixBuilder<T> Build = BuilderInstance<T>.Matrix;
-        
-        public int ColumnCount { get; private set; }
-        
-        public int RowCount { get; private set; }
-        
+
+        public MatrixDataContainer<T> Storage { get; }
+
+        public int ColumnCount { get; }
+
+        public int RowCount { get; }
+
         public T this[int row, int column]
         {
-            get { return Storage[row, column]; }
-            set { Storage[row, column] = value; }
+            get => Storage[row, column];
+            set => Storage[row, column] = value;
         }
-        
+
+        public bool Equals(Matrix<T> other)
+        {
+            return other != null && Storage.Equals(other.Storage);
+        }
+
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            return ToString();
+        }
+
         public T GetAt(int row, int column)
         {
             return Storage.GetAt(row, column);
         }
-        
+
         public void SetAt(int row, int column, T value)
         {
             Storage.SetAt(row, column, value);
         }
-        
+
         public void Clear()
         {
             Storage.Clear();
         }
-        
+
         public T[,] ToArray()
         {
             return Storage.ToArray();
@@ -71,11 +81,11 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 
         public override string ToString()
         {
-            StringBuilder strBuilder = new StringBuilder();
+            var strBuilder = new StringBuilder();
 
-            for (int i = 0; i < RowCount; i++)
+            for (var i = 0; i < RowCount; i++)
             {
-                for (int j = 0; j < ColumnCount; j++)
+                for (var j = 0; j < ColumnCount; j++)
                 {
                     strBuilder.Append($"{GetAt(i, j)} ");
                 }
@@ -84,16 +94,6 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
             }
 
             return strBuilder.ToString();
-        }
-        
-        public string ToString(string format, IFormatProvider formatProvider)
-        {
-            return ToString();
-        }
-
-        public bool Equals(Matrix<T> other)
-        {
-            return other != null && Storage.Equals(other.Storage);
         }
 
         public override bool Equals(object obj)

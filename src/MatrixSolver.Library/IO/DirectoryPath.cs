@@ -1,20 +1,20 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace MatrixSolver.Library.IO
 {
     public class DirectoryPath : PathBase
     {
-        private DirectoryPath(string path) : base(path) {}
+        private DirectoryPath(string path) : base(path)
+        {
+        }
 
         /// <summary>
-        /// The name of the directory for the path
+        ///     The name of the directory for the path
         /// </summary>
         public string DirectoryName => new DirectoryInfo(FSPath).Name;
-        
+
         protected override void CreateOnDisk()
         {
             Directory.CreateDirectory(FSPath);
@@ -81,14 +81,14 @@ namespace MatrixSolver.Library.IO
             }
 
             // Copy all files.
-            string[] files = GetFiles();
-            foreach(var file in files)
+            var files = GetFiles();
+            foreach (var file in files)
             {
                 var fileName = Path.GetFileName(file);
                 File.Move(Path.Combine(FSPath, fileName), Path.Combine(destination.FSPath, fileName));
             }
         }
-        
+
         public static PathBase OpenOrCreate(string path)
         {
             var dir = new DirectoryPath(path);

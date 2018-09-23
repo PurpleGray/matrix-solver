@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using MatrixSolver.Library.IO;
 using MatrixSolver.Library.Utils;
 
 namespace MatrixSolver.ConsoleApp
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             string directoryPath = null;
             if (args.Length == 0)
@@ -28,13 +27,13 @@ namespace MatrixSolver.ConsoleApp
             var mtxDir = FileSystemHelper.WorkWithFolder(directoryPath);
 
             CheckDirectoryValidity(mtxDir);
-            
+
             var anyErrorsFlag = false;
             var problematicFiles = new List<string>();
 
             foreach (var matrixFile in mtxDir.EnumerateFiles("*.txt"))
             {
-                var fileProcessingResult = MatrixHelper.ProcessMatrixFile(matrixFile);
+                var fileProcessingResult = matrixFile.ProcessMatrixFile();
 
                 if (!fileProcessingResult.Success)
                 {
@@ -42,6 +41,7 @@ namespace MatrixSolver.ConsoleApp
                     {
                         anyErrorsFlag = true;
                     }
+
                     problematicFiles.Add(matrixFile.PathItemName);
 
                     Console.WriteLine(fileProcessingResult.ErrorMessage);
@@ -57,7 +57,7 @@ namespace MatrixSolver.ConsoleApp
 
                 Console.WriteLine($"Calculation process for file {matrixFile.PathItemName} is completed successfully!");
             }
-            
+
             // Move result files to the same folder
             var resultsDir = FileSystemHelper.WorkWithFolder(Path.Combine(directoryPath, "Results"));
             resultsDir.MoveAllFiles(mtxDir);
@@ -65,10 +65,11 @@ namespace MatrixSolver.ConsoleApp
 
             if (anyErrorsFlag)
             {
-                Console.WriteLine("Program completed calculations with errors for some files. List of these files:\r\n");
+                Console.WriteLine(
+                    "Program completed calculations with errors for some files. List of these files:\r\n");
                 if (problematicFiles.Count > 1)
                 {
-                    StringBuilder fileNamesBuilder = new StringBuilder();
+                    var fileNamesBuilder = new StringBuilder();
 
                     for (var i = 0; i < problematicFiles.Count; i++)
                     {
@@ -79,7 +80,7 @@ namespace MatrixSolver.ConsoleApp
                             fileNamesBuilder.Append("\r\n");
                         }
                     }
-                    
+
                     Console.WriteLine(fileNamesBuilder.ToString());
                 }
                 else

@@ -6,12 +6,12 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
         {
             return leftSide.Add(rightSide);
         }
-        
+
         public static Matrix<T> operator -(Matrix<T> leftSide, Matrix<T> rightSide)
         {
             return leftSide.Subtract(rightSide);
         }
-        
+
         public static Matrix<T> operator *(Matrix<T> leftSide, Matrix<T> rightSide)
         {
             return leftSide.Multiply(rightSide);

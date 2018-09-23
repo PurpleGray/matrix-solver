@@ -1,5 +1,3 @@
-using System.Threading;
-
 namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer
 {
     public class MatrixDataContainer : MatrixDataContainer<int>

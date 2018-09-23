@@ -12,18 +12,19 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer
         {
             if (other.RowCount != RowCount || other.ColumnCount != ColumnCount)
             {
-                throw new ArgumentOutOfRangeException("Error while trying to Add two matrixes, dimensions are not the same " +
-                                                      $"({RowCount} x {ColumnCount}, " +
-                                                      $"{other.RowCount} x {other.ColumnCount})");
+                throw new ArgumentOutOfRangeException(
+                    "Error while trying to Add two matrixes, dimensions are not the same " +
+                    $"({RowCount} x {ColumnCount}, " +
+                    $"{other.RowCount} x {other.ColumnCount})");
             }
-            
-            Matrix<int> result = Matrix<int>.Build.FromDimensions(RowCount, ColumnCount);
 
-            for (int i = 0; i < RowCount; i++)
+            var result = Build.FromDimensions(RowCount, ColumnCount);
+
+            for (var i = 0; i < RowCount; i++)
             {
-                for (int j = 0; j < ColumnCount; j++)
+                for (var j = 0; j < ColumnCount; j++)
                 {
-                    result [i, j] = this[i,j] + other[i,j];
+                    result[i, j] = this[i, j] + other[i, j];
                 }
             }
 
@@ -34,18 +35,19 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer
         {
             if (other.RowCount != RowCount || other.ColumnCount != ColumnCount)
             {
-                throw new ArgumentOutOfRangeException("Error while trying to Add two matrixes, dimensions are not the same " +
-                                                      $"({RowCount} x {ColumnCount}, " +
-                                                      $"{other.RowCount} x {other.ColumnCount})");
+                throw new ArgumentOutOfRangeException(
+                    "Error while trying to Add two matrixes, dimensions are not the same " +
+                    $"({RowCount} x {ColumnCount}, " +
+                    $"{other.RowCount} x {other.ColumnCount})");
             }
-            
-            Matrix<int> result = Matrix<int>.Build.FromDimensions(RowCount, ColumnCount);
 
-            for (int i = 0; i < RowCount; i++)
+            var result = Build.FromDimensions(RowCount, ColumnCount);
+
+            for (var i = 0; i < RowCount; i++)
             {
-                for (int j = 0; j < ColumnCount; j++)
+                for (var j = 0; j < ColumnCount; j++)
                 {
-                    result [i, j] = this[i,j] - other[i,j];
+                    result[i, j] = this[i, j] - other[i, j];
                 }
             }
 
@@ -56,23 +58,25 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer
         {
             if (ColumnCount != other.RowCount)
             {
-                throw new ArgumentOutOfRangeException("Error while trying to Add two matrixes, dimensions are not compatible " +
-                                                      $"({this.RowCount} x {this.ColumnCount}, " +
-                                                      $"{other.RowCount} x {other.ColumnCount})");
+                throw new ArgumentOutOfRangeException(
+                    "Error while trying to Add two matrixes, dimensions are not compatible " +
+                    $"({RowCount} x {ColumnCount}, " +
+                    $"{other.RowCount} x {other.ColumnCount})");
             }
-            
-            Matrix<int> resultMatrix = Matrix<int>.Build.FromDimensions(RowCount, other.ColumnCount);
-            for (int i = 0; i < resultMatrix.RowCount; i++)
+
+            var resultMatrix = Build.FromDimensions(RowCount, other.ColumnCount);
+            for (var i = 0; i < resultMatrix.RowCount; i++)
             {
-                for (int j = 0; j < resultMatrix.ColumnCount; j++)
+                for (var j = 0; j < resultMatrix.ColumnCount; j++)
                 {
                     resultMatrix[i, j] = 0;
-                    for (int k = 0; k < ColumnCount; k++)
+                    for (var k = 0; k < ColumnCount; k++)
                     {
                         resultMatrix[i, j] += this[i, k] * other[k, j];
                     }
                 }
             }
+
             return resultMatrix;
         }
     }
