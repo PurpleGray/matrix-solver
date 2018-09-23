@@ -55,7 +55,7 @@ namespace MatrixSolver.Library.IO
 
         public IEnumerable<FilePath> EnumerateFiles(string extensionPattern = null)
         {
-            return Directory.EnumerateFiles(FSPath, extensionPattern).Select(_ => new FilePath(_));
+            return Directory.EnumerateFiles(FSPath, extensionPattern ?? "").Select(_ => new FilePath(_));
         }
 
         public FilePath ForFile(string name)
