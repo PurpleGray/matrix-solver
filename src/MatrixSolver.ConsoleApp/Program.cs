@@ -65,7 +65,7 @@ namespace MatrixSolver.ConsoleApp
 
             // Move result files to the same folder
             // NOTE: this done because of performance reasons. At this time we are enumerating files in folder,
-            // not just gather them all in memory and process. This can be optimized in future by multithreading, I think
+            // not just gather them all in memory and process. This can be optimized in future by multithreading
             var resultsDir = FileSystemHelper.WorkWithFolder(Path.Combine(directoryPath, "Results"));
             resultsDir.MoveAllFiles(mtxDir);
             resultsDir.Delete();
@@ -100,7 +100,7 @@ namespace MatrixSolver.ConsoleApp
             {
                 Console.WriteLine(
                     "Program completed calculations without errors, result can be found in the same folder " +
-                    "where original matrixes was (with _result.txt postfix)");
+                    "were original matrices was (with _result.txt postfix)");
             }
 
             Console.ReadLine();
@@ -124,7 +124,7 @@ namespace MatrixSolver.ConsoleApp
 
             if (!directory.IsFilesWithExtensionExists(".txt"))
             {
-                Console.WriteLine("Provided directory path containts no .txt files");
+                Console.WriteLine("Provided directory path contains no .txt files");
                 Console.ReadLine();
                 Environment.Exit(0);
             }
