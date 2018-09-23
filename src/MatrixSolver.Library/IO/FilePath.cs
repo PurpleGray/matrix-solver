@@ -29,6 +29,11 @@ namespace MatrixSolver.Library.IO
             File.WriteAllText(FSPath, content);
         }
 
+        public void WriteLines(string[] content)
+        {
+            File.WriteAllLines(FSPath, content);
+        }
+
         public string ReadAllText()
         {
             return File.ReadAllText(FSPath);
