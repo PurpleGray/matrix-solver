@@ -12,13 +12,13 @@ namespace MatrixSolver.Library.Tests
 {
     public class IOTests
     {
-        private static readonly string BasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Matrixes");
+        public static readonly string MatrixesTestFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Matrixes");
         
         [Fact]
         public void WriteOnDiskTest()
         {
             // Create and clear folder for matrixes
-            var mtxFolder = FileSystemHelper.WorkWithFolder(BasePath);
+            var mtxFolder = FileSystemHelper.WorkWithFolder(MatrixesTestFolderPath);
             mtxFolder.Clear();
 
             // Write each test file in folder
@@ -29,14 +29,14 @@ namespace MatrixSolver.Library.Tests
 
             // Check that all files has been written
             var writtenFiles = mtxFolder.EnumerateFiles();
-            Assert.True(writtenFiles.All(file_name => MatrixesTestData.TestFiles.Any(pair => pair.Key == Path.GetFileName(file_name))));
+            Assert.True(writtenFiles.All(file => MatrixesTestData.TestFiles.Any(pair => pair.Key == file.PathItemName)));
 
             bool CheckFilesContent()
             {
                 foreach (var file in writtenFiles)
                 {
-                    var fileData = File.ReadAllText(file).Trim();
-                    var templateData = string.Join("\r\n", MatrixesTestData.TestFiles[Path.GetFileName(file)]);
+                    var fileData = file.ReadAllText().Trim();
+                    var templateData = string.Join("\r\n", MatrixesTestData.TestFiles[file.PathItemName]);
                     if (!fileData.Equals(templateData))
                     {
                         return false;
