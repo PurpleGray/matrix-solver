@@ -33,6 +33,16 @@ namespace MatrixSolver.Library.IO
             return Directory.Exists(FSPath);
         }
 
+        public bool IsFileExists(string name)
+        {
+            return File.Exists(Path.Combine(FSPath, name));
+        }
+
+        public void DeleteFile(string name)
+        {
+            File.Delete(Path.Combine(FSPath, name));
+        }
+
         public IEnumerable<string> EnumerateFiles()
         {
             return Directory.EnumerateFiles(FSPath);
