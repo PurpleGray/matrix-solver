@@ -6,9 +6,9 @@ using System.Reflection;
 
 namespace MatrixSolver.TestData
 {
-    public static class TestData
+    public static class TestDataReader
     {
-        static readonly Assembly DataAssembly = typeof(TestData).GetTypeInfo().Assembly;
+        static readonly Assembly DataAssembly = typeof(TestDataReader).GetTypeInfo().Assembly;
         
         public static Stream ReadStream(string name)
         {
