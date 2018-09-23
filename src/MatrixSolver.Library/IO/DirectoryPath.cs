@@ -33,9 +33,19 @@ namespace MatrixSolver.Library.IO
             return Directory.Exists(FSPath);
         }
 
+        public bool IsEmpty()
+        {
+            return !Directory.EnumerateFileSystemEntries(FSPath).Any();
+        }
+
         public bool IsFileExists(string name)
         {
             return File.Exists(Path.Combine(FSPath, name));
+        }
+
+        public bool IsFilesWithExtensionExists(string extension)
+        {
+            return Directory.EnumerateFiles(FSPath, $"*{extension}").Any();
         }
 
         public void DeleteFile(string name)
