@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -27,7 +28,7 @@ namespace MatrixSolver.ConsoleApp
             var anyErrorsFlag = false;
             var problematicFiles = new List<string>();
 
-            foreach (var matrixFile in mtxDir.EnumerateFiles(".txt"))
+            foreach (var matrixFile in mtxDir.EnumerateFiles("*.txt"))
             {
                 var fileProcessingResult = MatrixHelper.ProcessMatrixFile(matrixFile);
 
@@ -81,7 +82,7 @@ namespace MatrixSolver.ConsoleApp
             {
                 Console.WriteLine(
                     "Program completed calculations without errors, result can be found in the same folder " +
-                    "where original matrixes was (with _result.txt prefix)");
+                    "where original matrixes was (with _result.txt postfix)");
             }
 
             Console.ReadLine();
