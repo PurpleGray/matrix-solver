@@ -13,7 +13,7 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer
             if (other.RowCount != RowCount || other.ColumnCount != ColumnCount)
             {
                 throw new ArgumentOutOfRangeException("Error while trying to Add two matrixes, dimensions are not the same " +
-                                                      $"({this.RowCount} x {this.ColumnCount}, " +
+                                                      $"({RowCount} x {ColumnCount}, " +
                                                       $"{other.RowCount} x {other.ColumnCount})");
             }
             
@@ -35,7 +35,7 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer
             if (other.RowCount != RowCount || other.ColumnCount != ColumnCount)
             {
                 throw new ArgumentOutOfRangeException("Error while trying to Add two matrixes, dimensions are not the same " +
-                                                      $"({this.RowCount} x {this.ColumnCount}, " +
+                                                      $"({RowCount} x {ColumnCount}, " +
                                                       $"{other.RowCount} x {other.ColumnCount})");
             }
             

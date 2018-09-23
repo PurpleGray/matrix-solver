@@ -9,4 +9,13 @@
       <ProjectReference Include="..\MatrixSolver.Library\MatrixSolver.Library.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="..\..\.editorconfig">
+        <Link>.editorconfig</Link>
+      </Content>
+      <Content Include="..\..\NuGet.Config">
+        <Link>NuGet.Config</Link>
+      </Content>
+    </ItemGroup>
+
 </Project>
