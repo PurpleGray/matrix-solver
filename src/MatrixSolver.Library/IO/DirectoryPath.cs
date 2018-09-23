@@ -13,7 +13,7 @@ namespace MatrixSolver.Library.IO
         /// <summary>
         /// The name of the directory for the path
         /// </summary>
-        public string DirectoryName => System.IO.Path.GetDirectoryName(FSPath);
+        public string DirectoryName => new DirectoryInfo(FSPath).Name;
         
         protected override void CreateOnDisk()
         {
@@ -43,9 +43,9 @@ namespace MatrixSolver.Library.IO
             File.Delete(Path.Combine(FSPath, name));
         }
 
-        public IEnumerable<string> EnumerateFiles()
+        public IEnumerable<FilePath> EnumerateFiles()
         {
-            return Directory.EnumerateFiles(FSPath);
+            return Directory.EnumerateFiles(FSPath).Select(_ => new FilePath(_));
         }
 
         public FilePath ForFile(string name)

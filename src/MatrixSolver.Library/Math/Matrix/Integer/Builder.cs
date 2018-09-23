@@ -18,7 +18,7 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer
         public override Matrix<int> FromFormattedString(string rawString)
         {
             // Delimit string by rows
-            var strRows = rawString.Split(new[] {'\r', '\n'});
+            var strRows = rawString.Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries);
             // Get matrix sizes
             var rowCount = strRows.Length;
             var colCount = strRows[0].Trim().Split(new char[] {' ', '\t'}, StringSplitOptions.RemoveEmptyEntries).Length;
@@ -47,7 +47,15 @@ namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer
 
         public override Matrix<int> SameAs(Matrix<int> matrix)
         {
-            return new Integer.Matrix(new MatrixDataContainer(matrix.RowCount, matrix.ColumnCount));
+            return new Integer.Matrix(MatrixDataContainer.OfSize(matrix.RowCount, matrix.ColumnCount));
+        }
+
+        public override Matrix<int> CopyOf(Matrix<int> matrix)
+        {
+            var dataContainer = MatrixDataContainer.OfSize(matrix.RowCount, matrix.ColumnCount);
+            
+            matrix.Storage.CopyTo(dataContainer);
+            return new Integer.Matrix(dataContainer);
         }
 
         public override Matrix<int> Random(int rowCount, int columnCount, int minVal = 0, int maxVal = 500)
