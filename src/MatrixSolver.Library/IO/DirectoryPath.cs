@@ -28,6 +28,11 @@ namespace MatrixSolver.Library.IO
             }
         }
 
+        public override void Delete()
+        {
+            Directory.Delete(FSPath);
+        }
+
         public override bool IsExists()
         {
             return Directory.Exists(FSPath);
@@ -53,6 +58,11 @@ namespace MatrixSolver.Library.IO
             File.Delete(Path.Combine(FSPath, name));
         }
 
+        public string[] GetFiles()
+        {
+            return Directory.GetFiles(FSPath);
+        }
+
         public IEnumerable<FilePath> EnumerateFiles(string extensionPattern = null)
         {
             return Directory.EnumerateFiles(FSPath, extensionPattern ?? "").Select(_ => new FilePath(_));
@@ -61,6 +71,22 @@ namespace MatrixSolver.Library.IO
         public FilePath ForFile(string name)
         {
             return new FilePath(Path.Combine(FSPath, name));
+        }
+
+        public void MoveAllFiles(DirectoryPath destination)
+        {
+            if (!destination.IsExists())
+            {
+                destination.CreateOnDisk();
+            }
+
+            // Copy all files.
+            string[] files = GetFiles();
+            foreach(var file in files)
+            {
+                var fileName = Path.GetFileName(file);
+                File.Move(Path.Combine(FSPath, fileName), Path.Combine(destination.FSPath, fileName));
+            }
         }
         
         public static PathBase OpenOrCreate(string path)

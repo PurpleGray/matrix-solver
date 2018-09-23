@@ -26,7 +26,7 @@ namespace MatrixSolver.Library.IO
             File.WriteAllText(FSPath, string.Empty);
         }
 
-        public void Delete()
+        public override void Delete()
         {
             File.Delete(FSPath);
         }
