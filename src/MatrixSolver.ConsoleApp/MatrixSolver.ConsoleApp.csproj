@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\MatrixSolver.Library\MatrixSolver.Library.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\..\.editorconfig">
+        <Link>.editorconfig</Link>
+      </Content>
+      <Content Include="..\..\NuGet.Config">
+        <Link>NuGet.Config</Link>
+      </Content>
+    </ItemGroup>
+
+</Project>
