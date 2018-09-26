@@ -15,7 +15,7 @@ namespace MatrixSolver.Library.IO
         public string FSPath { get; }
 
         /// <summary>
-        ///     The filename or folder name for the , including the extension.
+        /// The filename or folder name for the item, including the extension.
         /// </summary>
         public string PathItemName => Path.GetFileName(FSPath);
 

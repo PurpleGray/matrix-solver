@@ -4,7 +4,7 @@ using MatrixSolver.Library.Math.LinearAlgebra.Matrix.Integer;
 namespace MatrixSolver.Library.Math.LinearAlgebra.Matrix
 {
     /// <summary>
-    /// Matrix builder class which helps to create matrixes differently
+    /// Matrix builder class which helps to create matrices
     /// </summary>
     public abstract class MatrixBuilder<T> where T : struct, IEquatable<T>, IFormattable
     {

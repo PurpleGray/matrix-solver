@@ -9,7 +9,7 @@ namespace MatrixSolver.Library.IO
         }
 
         /// <summary>
-        /// Path to directory where file is
+        /// Path to directory where file is being stored
         /// </summary>
         public string DirectoryPath => Path.GetDirectoryName(FSPath);
 
